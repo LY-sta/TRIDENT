@@ -63,9 +63,10 @@ def process_slide(args):
     )
     slide.segment_tissue(
         segmentation_model=segmentation_model,
-        target_mag=segmentation_model.target_mag,
+        target_mag=5,  # 降低到 5x
         job_dir=args.job_dir,
-        device=f"cuda:{args.gpu}"
+        device=f"cuda:{args.gpu}",
+        batch_size=1  # 明确设置 batch_size=1
     )
     print(f"Tissue segmentation completed. Results saved to {args.job_dir}contours_geojson and {args.job_dir}contours")
 
