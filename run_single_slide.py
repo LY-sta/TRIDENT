@@ -61,11 +61,12 @@ def process_slide(args):
         model_name=args.segmenter,
         confidence_thresh=args.seg_conf_thresh,
     )
-    slide.segment_tissue(
+     slide.segment_tissue(
         segmentation_model=segmentation_model,
-        target_mag=segmentation_model.target_mag,
+        target_mag=segmentation_model.target_mag,  # 修改回官方版本了，能运行的是target_mag=5,
         job_dir=args.job_dir,
         device=f"cuda:{args.gpu}"
+        # 这里吧 ,batch_size=1删去了,也就是改回了官方的版本
     )
     print(f"Tissue segmentation completed. Results saved to {args.job_dir}contours_geojson and {args.job_dir}contours")
 
